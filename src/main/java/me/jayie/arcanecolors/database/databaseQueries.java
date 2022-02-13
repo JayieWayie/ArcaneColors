@@ -17,19 +17,23 @@ public class databaseQueries {
     }
 
     public void createTable() throws SQLException {
-        PreparedStatement table = plugin.DB.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS SCPlayer(playerUUID varchar(255), Frozen int(1), Vanished int(1), PRIMARY KEY(playerUUID))");
+        PreparedStatement table = plugin.DB.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS chatcolor(playerUUID varchar(255),color varchar(50),bold int(1),italic int(1),underline int(1),strikethrough int(1),magic int(1), PRIMARY KEY(playerUUID))");
         table.executeUpdate();
-        plugin.getLogger().info(Color("&8[&6Marriage&8] &6Database table created."));
+        plugin.getLogger().info(Color("&8[&dArcaneColors&8] &6Database table created."));
     }
 
 
     public void createPlayer(Player player) throws SQLException {
         UUID uuid = player.getUniqueId();
         if (!doesPlayerExist(player)){
-            PreparedStatement createPlayer = plugin.DB.getConnection().prepareStatement("INSERT IGNORE INTO SCPlayer(playerUUID, Frozen, Vanished) VALUES (?,?,?)");
+            PreparedStatement createPlayer = plugin.DB.getConnection().prepareStatement("INSERT IGNORE INTO chatcolor(playerUUID, color, bold, italic, underline, strikethrough, magic) VALUES (?,?,?,?,?,?,?)");
             createPlayer.setString(1, uuid.toString());
-            createPlayer.setInt(2, 0);
+            createPlayer.setString(2, "N/A");
             createPlayer.setInt(3, 0);
+            createPlayer.setInt(4, 0);
+            createPlayer.setInt(5, 0);
+            createPlayer.setInt(6, 0);
+            createPlayer.setInt(7, 0);
             createPlayer.executeUpdate();
         }
     }
@@ -37,8 +41,7 @@ public class databaseQueries {
 
     public boolean doesPlayerExist(Player player) throws SQLException{
         UUID uuid = player.getUniqueId();
-
-        PreparedStatement ps1 = plugin.DB.getConnection().prepareStatement("SELECT * FROM SCPlayer WHERE playerUUID=?");
+        PreparedStatement ps1 = plugin.DB.getConnection().prepareStatement("SELECT * FROM chatcolor WHERE playerUUID=?");
         ps1.setString(1, String.valueOf(uuid));
         ResultSet rs1 = ps1.executeQuery();
         if (rs1.next()){

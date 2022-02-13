@@ -12,9 +12,10 @@
 # %prefix% | Returns the prefix of the plugin.
 # %status% | Returns the status of a toggle.
 
-# Supports HEX Colours on ALL messages.
+# Supports HEX Colours on ALL messages. Hex format: &#(6 digit code). e.g. &#ffffff
 # Add my discord for support @ Jayie#0666
 
+# Plugin settings.
 Plugin:
   Prefix: '&8[&9AC&8]'
   Database:
@@ -29,10 +30,11 @@ Plugin:
       Database: 'ac_colors'
   Permissions:
     Color:
-      # All colors.
+      # Access to all colors.
       Set: 'arcanecolors.color.set'
       Hex: 'arcanecolors.color.hex'
       Force: 'arcanecolors.color.force'
+      # Access to certain colors.
       CertainColor: 'arcanecolors.color.%color-name%'
     Reset:
       Player: 'arcanecolors.reset'
@@ -48,6 +50,7 @@ Plugin:
       AllPerms: 'arcanecolors.*'
 
 
+# GUI settings, shown on command /color gui.
 GUI:
   Settings:
     Title: '&cChatColor GUI'
@@ -61,7 +64,7 @@ GUI:
         Order: 'Ascending'
 
 
-#
+# All plugin messages.
 Messages:
   Color:
     Success: '%prefix% &7You have chosen %color%THIS as your chatcolor.'
@@ -91,3 +94,16 @@ Errors:
   NoPermissions: '%prefix% &cError: You do not have permission to %permission%.'
   InvalidArgument: '%prefix% &cError: Invalid Argument. Try /color help.'
   NullPlayer: '%prefix% &cError: That player does not exist or is not online.'
+
+Colors-By-Permission:
+  # Supports HEX Colors.
+  # Hex Format: &#(6 digit code). e.g. &#ffffff
+# NUMBER:
+  # Color: COLOR
+  # Permission: arcanecolors.(name)
+  1:
+    Color: '&c'
+    Permission: arcanecolors.staff
+  2:
+    Color: '&f'
+    Permission: arcanecolors.donator
