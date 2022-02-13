@@ -1,0 +1,6 @@
+name: ArcaneColors
+version: '${project.version}'
+main: me.jayie.arcanecolors.ArcaneColors
+api-version: 1.18
+authors: [ Jayie, uwuLemon ]
+description: ChatColor plugin made for ArcaneMC
