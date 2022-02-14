@@ -21,29 +21,20 @@ public class databaseConnection {
     }
 
     public void connect() throws SQLException {
-        String host = plugin.getConfig().getString("Database.Address");
-        String port = plugin.getConfig().getString("Database.Port");
-        String user = plugin.getConfig().getString("Database.Username");
-        String pass = plugin.getConfig().getString("Database.Password");
-        String database = plugin.getConfig().getString("Database.Database");
-        String databaseCheck = plugin.getConfig().getString("Database.Type");
+        String host = plugin.getConfig().getString("Plugin.Database.MySQL.Address");
+        String port = plugin.getConfig().getString("Plugin.Database.MySQL.Port");
+        String user = plugin.getConfig().getString("Plugin.Database.MySQL.Username");
+        String pass = plugin.getConfig().getString("Plugin.Database.MySQL.Password");
+        String database = plugin.getConfig().getString("Plugin.Database.MySQL.Database");
 
-        if (!isConnected()) {
-            if (databaseCheck.equalsIgnoreCase("MySQL")) {
-                try {
-                    this.connection = DriverManager.getConnection("jdbc:mysql://" + URLEncoder.encode(user, StandardCharsets.UTF_8) + ":" + URLEncoder.encode(pass, StandardCharsets.UTF_8) + "@" + host + ":" + port + "/" + database + "?autoReconnect=true");
-                } catch (SQLException e) {
-                    plugin.getLogger().severe("! DATABASE NEEDS TO BE CONNECTED !");
-                }
-            }else{
-                try {
-                    this.connection = DriverManager.getConnection("jdbc:H2://home/plugins/StaffCore/h2database");
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+             if (!isConnected()) {
+                 try{
+                     this.connection = DriverManager.getConnection("jdbc:mysql://" + URLEncoder.encode(user, StandardCharsets.UTF_8) + ":" + URLEncoder.encode(pass, StandardCharsets.UTF_8) + "@" + host + ":" + port + "/" + database + "?autoReconnect=true");
+                 } catch (SQLException e) {
+                     plugin.getLogger().severe("! DATABASE NEEDS TO BE CONNECTED !");
+                 }
+             }
+         }
 
     public void disconnect(){
         if (isConnected()){

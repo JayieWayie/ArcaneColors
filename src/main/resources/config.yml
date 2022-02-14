@@ -19,9 +19,6 @@
 Plugin:
   Prefix: '&8[&9AC&8]'
   Database:
-    # Options: MySQL, H2. Recommended MySQL.
-    Type: 'H2'
-    # Ignore this part if you have chosen H2.
     MySQL:
       Address: 'localhost'
       Port: '3306'
@@ -104,7 +101,7 @@ Colors-By-Permission:
   # Permission: arcanecolors.(name)
   1:
     Color: '&c'
-    Permission: arcanecolors.staff
+    Permission: 'arcanecolors.staff'
   2:
     Color: '&f'
-    Permission: arcanecolors.donator
+    Permission: 'arcanecolors.donator'

@@ -22,19 +22,28 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
     public databaseConnection DB;
     public databaseQueries DBQ;
 
+
+
     @Override
     public void onEnable() {
-        startup();
-        try {
-            database();
-        } catch(SQLException e){
-            getLogger().info("&8[&dArcaneColors&8] &cERROR.");
-        }
         config();
         commands();
         listeners();
         this.DB = new databaseConnection();
         this.DBQ = new databaseQueries(this);
+        startup();
+        try {
+            DB.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (DB.isConnected()) {
+            try {
+                DBQ.createTable();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void commands(){
@@ -43,18 +52,6 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
 
     public void listeners(){
         getServer().getPluginManager().registerEvents(this, this);
-    }
-
-    public void database() throws SQLException {
-        if (!DB.isConnected()){
-            DB.connect();
-            getLogger().severe("&8[&dArcaneColors&8] &cDatabase is not connected.");
-            getLogger().severe("&8[&dArcaneColors&8] &cConnect the database in config.yml.");
-            getLogger().severe("&8[&dArcaneColors&8] &cIf you believe this is an error report it to Jayie.");
-        }else{
-            DBQ.createTable();
-        }
-
     }
 
     public void startup(){
@@ -93,4 +90,5 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
         s = ChatColor.translateAlternateColorCodes('&', s);
         return s;
     }
+
 }
