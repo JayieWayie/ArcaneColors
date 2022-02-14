@@ -1,10 +1,12 @@
 package me.jayie.arcanecolors;
 
+import me.jayie.arcanecolors.Commands.playerCommands;
 import me.jayie.arcanecolors.database.databaseConnection;
 import me.jayie.arcanecolors.database.databaseQueries;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,7 +17,7 @@ import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Objects;
 
-public final class ArcaneColors extends JavaPlugin {
+public final class ArcaneColors extends JavaPlugin implements Listener {
 
     public databaseConnection DB;
     public databaseQueries DBQ;
@@ -36,11 +38,11 @@ public final class ArcaneColors extends JavaPlugin {
     }
 
     public void commands(){
-
+        getCommand("chatcolor").setExecutor(new playerCommands(this));
     }
 
     public void listeners(){
-
+        getServer().getPluginManager().registerEvents(this, this);
     }
 
     public void database() throws SQLException {

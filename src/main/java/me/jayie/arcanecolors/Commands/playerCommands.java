@@ -38,7 +38,7 @@ public class playerCommands implements CommandExecutor {
 
 
 
-            if (command.getName().equalsIgnoreCase("color")){
+            if (command.getName().equalsIgnoreCase("chatcolor")){
 
                 PreparedStatement colorset = null;
                 PreparedStatement boldset = null;
@@ -300,7 +300,7 @@ public class playerCommands implements CommandExecutor {
                                 if (boldcheck == 1){
                                     boldset.setInt(1, 0);
                                 }else{
-                                    boldset.setInt(1,0);
+                                    boldset.setInt(1,1);
                                 }
                                 boldset.executeUpdate();
                             } catch (SQLException e) {
@@ -324,7 +324,7 @@ public class playerCommands implements CommandExecutor {
                                 if (italiccheck == 1){
                                     italicset.setInt(1, 0);
                                 }else{
-                                    italicset.setInt(1,0);
+                                    italicset.setInt(1,1);
                                 }
                                 italicset.executeUpdate();
                             } catch (SQLException e) {
@@ -337,19 +337,19 @@ public class playerCommands implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("underline") || args[1].equalsIgnoreCase("n")) {
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                PreparedStatement boldcheckps = plugin.DB.getConnection().prepareStatement("SELECT bold FROM chatcolor WHERE playerUUID=?");
-                                boldcheckps.setString(1, player.getUniqueId().toString());
-                                ResultSet boldcheckrs = boldcheckps.executeQuery();
-                                int boldcheck = 0;
-                                if (boldcheckrs.next()){
-                                    boldcheck = boldcheckrs.getInt("bold");
+                                PreparedStatement underlinecheckps = plugin.DB.getConnection().prepareStatement("SELECT underline FROM chatcolor WHERE playerUUID=?");
+                                underlinecheckps.setString(1, player.getUniqueId().toString());
+                                ResultSet underlinecheckrs = underlinecheckps.executeQuery();
+                                int underlinecheck = 0;
+                                if (underlinecheckrs.next()){
+                                    underlinecheck = underlinecheckrs.getInt("underline");
                                 }
-                                if (boldcheck == 1){
-                                    boldset.setInt(1, 0);
+                                if (underlinecheck == 1){
+                                    underlineset.setInt(1, 0);
                                 }else{
-                                    boldset.setInt(1,0);
+                                    underlineset.setInt(1,1);
                                 }
-                                boldset.executeUpdate();
+                                underlineset.executeUpdate();
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
@@ -360,6 +360,23 @@ public class playerCommands implements CommandExecutor {
 
                     } else if (args[1].equalsIgnoreCase("strikethrough") || args[1].equalsIgnoreCase("m")) {
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
+                            try {
+                                PreparedStatement strikethroughcheckps = plugin.DB.getConnection().prepareStatement("SELECT strikethrough FROM chatcolor WHERE playerUUID=?");
+                                strikethroughcheckps.setString(1, player.getUniqueId().toString());
+                                ResultSet strikethroughcheckrs = strikethroughcheckps.executeQuery();
+                                int strikethroughcheck = 0;
+                                if (strikethroughcheckrs.next()){
+                                    strikethroughcheck = strikethroughcheckrs.getInt("strikethrough");
+                                }
+                                if (strikethroughcheck == 1){
+                                    strikethroughset.setInt(1, 0);
+                                }else{
+                                    strikethroughset.setInt(1,1);
+                                }
+                                strikethroughset.executeUpdate();
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
 
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
@@ -367,6 +384,23 @@ public class playerCommands implements CommandExecutor {
 
                     } else if (args[1].equalsIgnoreCase("magic") || args[1].equalsIgnoreCase("k")) {
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
+                            try {
+                                PreparedStatement magiccheckps = plugin.DB.getConnection().prepareStatement("SELECT magic FROM chatcolor WHERE playerUUID=?");
+                                magiccheckps.setString(1, player.getUniqueId().toString());
+                                ResultSet magiccheckrs = magiccheckps.executeQuery();
+                                int magiccheck = 0;
+                                if (magiccheckrs.next()){
+                                    magiccheck = magiccheckrs.getInt("magic");
+                                }
+                                if (magiccheck == 1){
+                                    magicset.setInt(1, 0);
+                                }else{
+                                    magicset.setInt(1,1);
+                                }
+                                magicset.executeUpdate();
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
 
                         }else{
                             player.sendMessage(Color(Hex(noperm)));

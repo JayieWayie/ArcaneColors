@@ -48,6 +48,7 @@ Plugin:
     Admin:
       Reload: 'arcanecolors.reload'
       AllPerms: 'arcanecolors.*'
+  DefaultColor: '&7'
 
 
 # GUI settings, shown on command /color gui.
@@ -91,7 +92,7 @@ Messages:
 
 # Error messages.
 Errors:
-  NoPermissions: '%prefix% &cError: You do not have permission to %permission%.'
+  NoPermissions: '%prefix% &cError: You do not have permission to that.'
   InvalidArgument: '%prefix% &cError: Invalid Argument. Try /color help.'
   NullPlayer: '%prefix% &cError: That player does not exist or is not online.'
 

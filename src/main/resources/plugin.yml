@@ -5,4 +5,6 @@ api-version: 1.18
 authors: [ Jayie ]
 description: ChatColor plugin made for ArcaneMC
 commands:
-
+  chatcolor:
+    aliases: [cc, color]
+    description: Base player commands for ArcaneColors.
