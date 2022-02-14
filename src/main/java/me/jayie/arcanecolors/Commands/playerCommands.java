@@ -290,6 +290,7 @@ public class playerCommands implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("bold") || args[1].equalsIgnoreCase("l")) {
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
+                                String boldtoggle = plugin.getConfig().getString("Messages.Bold.Success");
                                 PreparedStatement boldcheckps = plugin.DB.getConnection().prepareStatement("SELECT bold FROM chatcolor WHERE playerUUID=?");
                                 boldcheckps.setString(1, player.getUniqueId().toString());
                                 ResultSet boldcheckrs = boldcheckps.executeQuery();
@@ -299,8 +300,14 @@ public class playerCommands implements CommandExecutor {
                                 }
                                 if (boldcheck == 1){
                                     boldset.setInt(1, 0);
+                                    boldtoggle.replace("%prefix%", prefix);
+                                    boldtoggle.replace("%status%", "off");
+                                    player.sendMessage(Color(Hex(boldtoggle)));
                                 }else{
                                     boldset.setInt(1,1);
+                                    boldtoggle.replace("%prefix%", prefix);
+                                    boldtoggle.replace("%status%", "on");
+                                    player.sendMessage(Color(Hex(boldtoggle)));
                                 }
                                 boldset.executeUpdate();
                             } catch (SQLException e) {
@@ -314,6 +321,7 @@ public class playerCommands implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("italic") || args[1].equalsIgnoreCase("o")) {
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
+                                String italictoggle = plugin.getConfig().getString("Messages.Italic.Success");
                                 PreparedStatement italiccheckps = plugin.DB.getConnection().prepareStatement("SELECT italic FROM chatcolor WHERE playerUUID=?");
                                 italiccheckps.setString(1, player.getUniqueId().toString());
                                 ResultSet italiccheckrs = italiccheckps.executeQuery();
@@ -323,8 +331,14 @@ public class playerCommands implements CommandExecutor {
                                 }
                                 if (italiccheck == 1){
                                     italicset.setInt(1, 0);
+                                    italictoggle.replace("%prefix%", prefix);
+                                    italictoggle.replace("%status%", "off");
+                                    player.sendMessage(Color(Hex(italictoggle)));
                                 }else{
                                     italicset.setInt(1,1);
+                                    italictoggle.replace("%prefix%", prefix);
+                                    italictoggle.replace("%status%", "on");
+                                    player.sendMessage(Color(Hex(italictoggle)));
                                 }
                                 italicset.executeUpdate();
                             } catch (SQLException e) {
@@ -337,6 +351,7 @@ public class playerCommands implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("underline") || args[1].equalsIgnoreCase("n")) {
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
+                                String underlinetoggle = plugin.getConfig().getString("Messages.Underline.Success");
                                 PreparedStatement underlinecheckps = plugin.DB.getConnection().prepareStatement("SELECT underline FROM chatcolor WHERE playerUUID=?");
                                 underlinecheckps.setString(1, player.getUniqueId().toString());
                                 ResultSet underlinecheckrs = underlinecheckps.executeQuery();
@@ -346,8 +361,14 @@ public class playerCommands implements CommandExecutor {
                                 }
                                 if (underlinecheck == 1){
                                     underlineset.setInt(1, 0);
+                                    underlinetoggle.replace("%prefix%", prefix);
+                                    underlinetoggle.replace("%status%", "off");
+                                    player.sendMessage(Color(Hex(underlinetoggle)));
                                 }else{
                                     underlineset.setInt(1,1);
+                                    underlinetoggle.replace("%prefix%", prefix);
+                                    underlinetoggle.replace("%status%", "on");
+                                    player.sendMessage(Color(Hex(underlinetoggle)));
                                 }
                                 underlineset.executeUpdate();
                             } catch (SQLException e) {
@@ -361,6 +382,7 @@ public class playerCommands implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("strikethrough") || args[1].equalsIgnoreCase("m")) {
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
+                                String sttoggle = plugin.getConfig().getString("Messages.Strikethrough.Success");
                                 PreparedStatement strikethroughcheckps = plugin.DB.getConnection().prepareStatement("SELECT strikethrough FROM chatcolor WHERE playerUUID=?");
                                 strikethroughcheckps.setString(1, player.getUniqueId().toString());
                                 ResultSet strikethroughcheckrs = strikethroughcheckps.executeQuery();
@@ -370,8 +392,14 @@ public class playerCommands implements CommandExecutor {
                                 }
                                 if (strikethroughcheck == 1){
                                     strikethroughset.setInt(1, 0);
+                                    sttoggle.replace("%prefix%", prefix);
+                                    sttoggle.replace("%status%", "off");
+                                    player.sendMessage(Color(Hex(sttoggle)));
                                 }else{
                                     strikethroughset.setInt(1,1);
+                                    sttoggle.replace("%prefix%", prefix);
+                                    sttoggle.replace("%status%", "on");
+                                    player.sendMessage(Color(Hex(sttoggle)));
                                 }
                                 strikethroughset.executeUpdate();
                             } catch (SQLException e) {
@@ -385,6 +413,7 @@ public class playerCommands implements CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("magic") || args[1].equalsIgnoreCase("k")) {
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
+                                String magictoggle = plugin.getConfig().getString("Messages.Magic.Success");
                                 PreparedStatement magiccheckps = plugin.DB.getConnection().prepareStatement("SELECT magic FROM chatcolor WHERE playerUUID=?");
                                 magiccheckps.setString(1, player.getUniqueId().toString());
                                 ResultSet magiccheckrs = magiccheckps.executeQuery();
@@ -394,8 +423,14 @@ public class playerCommands implements CommandExecutor {
                                 }
                                 if (magiccheck == 1){
                                     magicset.setInt(1, 0);
+                                    magictoggle.replace("%prefix%", prefix);
+                                    magictoggle.replace("%status%", "off");
+                                    player.sendMessage(Color(Hex(magictoggle)));
                                 }else{
                                     magicset.setInt(1,1);
+                                    magictoggle.replace("%prefix%", prefix);
+                                    magictoggle.replace("%status%", "on");
+                                    player.sendMessage(Color(Hex(magictoggle)));
                                 }
                                 magicset.executeUpdate();
                             } catch (SQLException e) {
