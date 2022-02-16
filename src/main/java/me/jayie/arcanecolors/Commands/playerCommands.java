@@ -46,48 +46,59 @@ public class playerCommands implements CommandExecutor {
                 PreparedStatement magicset = null;
                 PreparedStatement underlineset = null;
                 PreparedStatement strikethroughset = null;
+                String colorChoice = null;
                 try {
-                    colorset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor(color) VALUES (?)");
-                    boldset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor(bold) VALUES (?)");
-                    italicset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor(italic) VALUES (?)");
-                    magicset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor(magic) VALUES (?)");
-                    underlineset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor(underline) VALUES (?)");
-                    strikethroughset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor(strikethrough) VALUES (?)");
+                    colorset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor SET color=? WHERE playerUUID =?");
+                    boldset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor SET bold=? WHERE playerUUID =?");
+                    italicset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor SET italic=? WHERE playerUUID =?");
+                    magicset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor SET magic=? WHERE playerUUID =?");
+                    underlineset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor SET underline=? WHERE playerUUID =?");
+                    strikethroughset = plugin.DB.getConnection().prepareStatement("UPDATE chatcolor SET strikethrough=? WHERE playerUUID =?");
+
+
+                    colorset.setString(2, player.getUniqueId().toString());
+                    boldset.setString(2, player.getUniqueId().toString());
+                    italicset.setString(2, player.getUniqueId().toString());
+                    magicset.setString(2, player.getUniqueId().toString());
+                    underlineset.setString(2, player.getUniqueId().toString());
+                    strikethroughset.setString(2, player.getUniqueId().toString());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
 
                 if (args.length < 1){
-                    invalidArgument.replace("%prefix%", prefix);
-                    player.sendMessage(Color(Hex(invalidArgument)));
+                    try {
+                        player.openInventory(plugin.mGUI.mainMenu(player));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 if (args[0].equalsIgnoreCase("set")) {
-
 
                     if (args[1].equalsIgnoreCase("darkblue") || args[1].equalsIgnoreCase("1")) {
                         certaincolorperm.replace("%color-name%", "darkblue");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "1");
-                                success.replace("%color%", "&1");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, String.valueOf(ChatColor.valueOf("&1")));
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&1");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
-                    } else if (args[1].equalsIgnoreCase("darkgreen") || args[1].equalsIgnoreCase("2")) {
+                    } else if (args[1].equalsIgnoreCase("green") || args[1].equalsIgnoreCase("2")) {
                         certaincolorperm.replace("%color-name%", "darkgreen");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "2");
-                                success.replace("%color%", "&2");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, String.valueOf(ChatColor.valueOf("&2")));
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&2");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -95,12 +106,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "cyan");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "3");
-                                success.replace("%color%", "&3");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, String.valueOf(ChatColor.valueOf("&3")));
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&3");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -109,12 +120,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "darkred");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "4");
-                                success.replace("%color%", "&4");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, String.valueOf(ChatColor.valueOf("&4")));
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&4");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -123,12 +134,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "purple");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "5");
-                                success.replace("%color%", "&5");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, String.valueOf(ChatColor.valueOf("&5")));
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&5");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -137,12 +148,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "gold");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "6");
-                                success.replace("%color%", "&6");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, String.valueOf(ChatColor.valueOf("&6")));
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&6");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -151,12 +162,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "lightgray");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "7");
-                                success.replace("%color%", "&7");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, String.valueOf(ChatColor.valueOf("&7")));
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&7");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -165,26 +176,26 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "gray");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "8");
-                                success.replace("%color%", "&8");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, String.valueOf(ChatColor.valueOf("&8")));
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&8");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
 
-                    } else if (args[1].equalsIgnoreCase("pastelblue") || args[1].equalsIgnoreCase("9")) {
-                        certaincolorperm.replace("%color-name%", "pastelblue");
+                    } else if (args[1].equalsIgnoreCase("blue") || args[1].equalsIgnoreCase("9")) {
+                        certaincolorperm.replace("%color-name%", "blue");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "9");
-                                success.replace("%color%", "&9");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, "&9");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&9");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -193,12 +204,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "black");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "0");
-                                success.replace("%color%", "0");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, "&0");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&0");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -207,12 +218,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "lime");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "a");
-                                success.replace("%color%", "&a");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, "&a");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&a");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -221,12 +232,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "aqua");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "b");
-                                success.replace("%color%", "&b");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, "&b");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&b");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -235,12 +246,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "red");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "c");
-                                success.replace("%color%", "&c");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, "&c");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&c");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -249,12 +260,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "pink");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "d");
-                                success.replace("%color%", "&d");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, "&d");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&d");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -263,12 +274,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "yellow");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "e");
-                                success.replace("%color%", "&f");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, "&e");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&f");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -277,12 +288,12 @@ public class playerCommands implements CommandExecutor {
                         certaincolorperm.replace("%color-name%", "white");
                         if (player.hasPermission(certaincolorperm) || player.hasPermission(allcolorperm) || player.hasPermission(everyperm)) {
                             try {
-                                colorset.setString(1, "f");
-                                success.replace("%color%", "&f");
-                                player.sendMessage(Color(Hex(success)));
+                                colorset.setString(1, "&f");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
+                            success.replace("%color%", "&f");
+                            player.sendMessage(Color(Hex(success)));
                         }else{
                             player.sendMessage(Color(Hex(noperm)));
                         }
@@ -392,8 +403,8 @@ public class playerCommands implements CommandExecutor {
                                 }
                                 if (strikethroughcheck == 1){
                                     strikethroughset.setInt(1, 0);
-                                    sttoggle.replace("%prefix%", prefix);
-                                    sttoggle.replace("%status%", "off");
+                                    sttoggle.replaceAll("%prefix%", prefix);
+                                    sttoggle.replaceAll("%status%", "off");
                                     player.sendMessage(Color(Hex(sttoggle)));
                                 }else{
                                     strikethroughset.setInt(1,1);
@@ -445,7 +456,7 @@ public class playerCommands implements CommandExecutor {
                         if (player.hasPermission(hexperm) || player.hasPermission(everyperm)){
 
                             Pattern HEX_PATTERN = Pattern.compile("&(#\\w{6})");
-                            String hexChoice = args[1];
+                            String hexChoice = args[2];
                             if (hexChoice.matches(HEX_PATTERN.pattern())) {
                                 Matcher matcher = HEX_PATTERN.matcher(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', hexChoice));
                                 StringBuffer buffer = new StringBuffer();
@@ -464,11 +475,26 @@ public class playerCommands implements CommandExecutor {
                             player.sendMessage(Color(Hex(noperm)));
                         }
                     }
+
+
                     try {
                         colorset.executeUpdate();
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
+
+
+                }else if (args[0].equalsIgnoreCase("help")){
+
+                }else if (args[0].equalsIgnoreCase("gui")){
+                    String openmessage = plugin.getConfig().getString("GUI.Settings.OpeningMessage");
+                    openmessage.replace("%prefix%", prefix);
+                    player.sendMessage(Color(Hex(openmessage)));
+
+                }else if (args[0].equalsIgnoreCase("reset")){
+
+                }else{
+
                 }
 
 

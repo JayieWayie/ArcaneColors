@@ -1,6 +1,10 @@
 package me.jayie.arcanecolors;
 
 import me.jayie.arcanecolors.Commands.playerCommands;
+import me.jayie.arcanecolors.Guis.colorsGUI;
+import me.jayie.arcanecolors.Guis.guiCommands.mainGUICommands;
+import me.jayie.arcanecolors.Guis.mainGUI;
+import me.jayie.arcanecolors.Listeners.chatlistener;
 import me.jayie.arcanecolors.database.databaseConnection;
 import me.jayie.arcanecolors.database.databaseQueries;
 import org.bukkit.ChatColor;
@@ -21,6 +25,8 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
 
     public databaseConnection DB;
     public databaseQueries DBQ;
+    public mainGUI mGUI;
+    public colorsGUI cGUI;
 
 
 
@@ -31,6 +37,8 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
         listeners();
         this.DB = new databaseConnection();
         this.DBQ = new databaseQueries(this);
+        this.mGUI = new mainGUI(this);
+        this.cGUI = new colorsGUI(this);
         startup();
         try {
             DB.connect();
@@ -52,11 +60,13 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
 
     public void listeners(){
         getServer().getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(new chatlistener(this), this);
+        getServer().getPluginManager().registerEvents(new mainGUICommands(this), this);
     }
 
     public void startup(){
-        getLogger().info("&8[&dArcaneColors&8] &fPlugin started up.");
-        getLogger().info("&8[&dArcaneColors&8] &fCreated by Jayie");
+        getLogger().info(Color("&8[&dArcaneColors&8] &fPlugin started up."));
+        getLogger().info(Color("&8[&dArcaneColors&8] &fCreated by Jayie"));
     }
 
     public void config(){

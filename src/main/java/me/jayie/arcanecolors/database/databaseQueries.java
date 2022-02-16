@@ -28,7 +28,7 @@ public class databaseQueries {
         if (!doesPlayerExist(player)){
             PreparedStatement createPlayer = plugin.DB.getConnection().prepareStatement("INSERT IGNORE INTO chatcolor(playerUUID, color, bold, italic, underline, strikethrough, magic) VALUES (?,?,?,?,?,?,?)");
             createPlayer.setString(1, uuid.toString());
-            createPlayer.setString(2, plugin.getConfig().getString("DefaultColor"));
+            createPlayer.setString(2, "WHITE");
             createPlayer.setInt(3, 0);
             createPlayer.setInt(4, 0);
             createPlayer.setInt(5, 0);

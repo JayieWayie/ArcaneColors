@@ -1,10 +1,10 @@
 name: ArcaneColors
-version: '${project.version}'
+version: '-Beta.1.0.0'
 main: me.jayie.arcanecolors.ArcaneColors
 api-version: 1.18
 authors: [ Jayie ]
 description: ChatColor plugin made for ArcaneMC
 commands:
   chatcolor:
-    aliases: [cc, color]
+    aliases: [cc, color, arcanecolors, acc]
     description: Base player commands for ArcaneColors.

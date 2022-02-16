@@ -1,22 +1,28 @@
 #
+#
 #  ArcaneColors - A new age of chatcolor plugins.
 #             Created by Jayie
 #
-
+#
+# (!) ALL FEATURES AND MESSAGES SUPPORT HEX COLOURS. (!)
+# (!) HEX FORMAT &#(6 digit code) e.g. &#ffffff (!)
+#
+# To set a groups default color add them the permission.
+# arcanecolors.defaults.(color) <- only works with default minecraft colours.
 
 # Placeholders. (Format) Placeholder | Description.
 # %player% | Always returns the commandsender.
 # %color% | Returns the color chosen (in color format)
 # %color-name% | Returns the color chosen (in string format)
 # %target% | Returns the target name (only for staff commands)
-# %prefix% | Returns the prefix of the plugin.
 # %status% | Returns the status of a toggle.
-
-# Supports HEX Colours on ALL messages. Hex format: &#(6 digit code). e.g. &#ffffff
-# Add my discord for support @ Jayie#0666
+#
+# Join my discord for support @ https://discord.gg/cCPpfaJAtM
+#
 
 # Plugin settings.
 Plugin:
+  # Put infront of all messages.
   Prefix: '&8[&9AC&8]'
   Database:
     MySQL:
@@ -52,56 +58,46 @@ Plugin:
 GUI:
   Settings:
     Title: '&cChatColor GUI'
-    OpeningMessage: '&aOpening the chatcolor gui...'
+    OpeningMessage: '%prefix% &aOpening the chatcolor gui...'
     Items:
       Filler: 'WHITE_STAINED_GLASS_PANE'
       Colors:
         # Options: Wool, Concrete, Dye. Changes the blocks that the colors are showed as.
+        Title: ''
         Type: 'Dye'
-        # Options: Ascending, Descending, Random. Changes the order of the colors in the GUI.
-        Order: 'Ascending'
+      Staff:
+        Title: ''
+      Special:
+        Title: ''
 
 
 # All plugin messages.
 Messages:
   Color:
-    Success: '%prefix% &7You have chosen %color%THIS as your chatcolor.'
+    Success: '&7You have chosen %color%THIS as your chatcolor.'
     ForceSet:
-      Staff: '%prefix% &7You have set %color%THIS &7as the chatcolor for &e%target%'
-      Player: '%prefix% &7Your color was set to %color%THIS &7by &e%player%'
+      Staff: '&7You have set %color%THIS &7as the chatcolor for &e%target%'
+      Player: '&7Your color was set to %color%THIS &7by &e%player%'
   Reset:
-    Success: '%prefix% &7You have reset your chatcolor.'
+    Success: '&7You have reset your chatcolor.'
     ForceReset:
-      Staff: '%prefix% &7You reset chatcolor for &e%target%'
-      Player: '%prefix% &7Your color was reset by &e%player%'
+      Staff: '&7You reset chatcolor for &e%target%'
+      Player: '&7Your color was reset by &e%player%'
   Bold:
-    Success: '%prefix% &7You have set &eBOLD &7%status%.'
+    Success: '&7You have set &eBOLD &7%status%.'
   Italic:
-    Success: '%prefix% &7You have set &eITALIC &7%status%.'
+    Success: '&7You have set &eITALIC &7%status%.'
   Magic:
-    Success: '%prefix% &7You have set &eMAGIC &7%status%.'
+    Success: '&7You have set &eMAGIC &7%status%.'
   Underline:
-    Success: '%prefix% &7You have set &eUNDERLINE &7%status%.'
+    Success: '&7You have set &eUNDERLINE &7%status%.'
   Strikethrough:
-    Success: '%prefix% &7You have set &eStrikethrough &7%status%.'
+    Success: '&7You have set &eStrikethrough &7%status%.'
 
 
 
 # Error messages.
 Errors:
-  NoPermissions: '%prefix% &cError: You do not have permission to that.'
-  InvalidArgument: '%prefix% &cError: Invalid Argument. Try /color help.'
-  NullPlayer: '%prefix% &cError: That player does not exist or is not online.'
-
-Colors-By-Permission:
-  # Supports HEX Colors.
-  # Hex Format: &#(6 digit code). e.g. &#ffffff
-# NUMBER:
-  # Color: COLOR
-  # Permission: arcanecolors.(name)
-  1:
-    Color: '&c'
-    Permission: 'arcanecolors.staff'
-  2:
-    Color: '&f'
-    Permission: 'arcanecolors.donator'
+  NoPermissions: '&cError: You do not have permission to that.'
+  InvalidArgument: '&cError: Invalid Argument. Try /color help.'
+  NullPlayer: '&cError: That player does not exist or is not online.'
