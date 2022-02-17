@@ -28,6 +28,7 @@ public class colorGUICommands implements Listener {
         String ColorsGuiTitle = "&eColors Menu";
         String MainGuiTitle = "&cMain Color Menu";
         String StaffGuiTitle = "&dStaff Color Menu";
+        String SpecialGuiTitle = "&6Special Color Menu";
 
         Player player = (Player) e.getWhoClicked();
 
@@ -87,9 +88,26 @@ public class colorGUICommands implements Listener {
             } else if (slot == 11) {
                 player.openInventory(plugin.cGUI.colorGUI(player));
             } else if (slot == 13) {
-                player.sendMessage("open inventory *special*");
+                player.openInventory(plugin.specgui.specialGUI(player));
             } else if (slot == 15) {
                 player.openInventory(plugin.sGUI.mainMenu(player));
+            }
+        }else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', SpecialGuiTitle))){
+            e.setCancelled(true);
+
+            int slot = e.getRawSlot();
+            if (slot == 0) {
+                player.openInventory(plugin.mGUI.mainMenu(player));
+            } else if (slot == 11) {
+                player.performCommand("color set bold");
+            } else if (slot == 12) {
+                player.performCommand("color set italic");
+            } else if (slot == 13) {
+                player.performCommand("color set underline");
+            }else if (slot == 14){
+                player.performCommand("color set strikethrough");
+            }else if (slot==15){
+                player.performCommand("color set magic");
             }
         }
 

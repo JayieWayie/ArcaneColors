@@ -1,9 +1,11 @@
 package me.jayie.arcanecolors;
 
+import me.jayie.arcanecolors.Commands.adminCommands;
 import me.jayie.arcanecolors.Commands.playerCommands;
 import me.jayie.arcanecolors.Guis.colorsGUI;
 import me.jayie.arcanecolors.Guis.guiCommands.colorGUICommands;
 import me.jayie.arcanecolors.Guis.mainGUI;
+import me.jayie.arcanecolors.Guis.specialGUI;
 import me.jayie.arcanecolors.Guis.staffGUI;
 import me.jayie.arcanecolors.Listeners.chatlistener;
 import me.jayie.arcanecolors.Listeners.permissionsCheck;
@@ -30,6 +32,7 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
     public permissionsCheck pmc;
     public colorsGUI cGUI;
     public staffGUI sGUI;
+    public specialGUI specgui;
 
 
 
@@ -45,6 +48,7 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
         this.cGUI = new colorsGUI(this);
         this.pmc = new permissionsCheck(this);
         this.sGUI = new staffGUI(this);
+        this.specgui = new specialGUI(this);
         startup();
         try {
             DB.connect();
@@ -62,6 +66,7 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
 
     public void commands(){
         getCommand("chatcolor").setExecutor(new playerCommands(this));
+        getCommand("achatcolor").setExecutor(new adminCommands(this));
     }
 
     public void listeners(){
@@ -97,7 +102,7 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
         if (colorcheckrs.next()){
             color = colorcheckrs.getString("color");
         }
-        String message = Color(Hex(getConfig().getString("Plugin.Prefix") + "" + "&7Your current chatcolor is %color%this&7."));
+        String message = Color(Hex(getConfig().getString("Plugin.Prefix") + " " + "&7Your current chatcolor is %color%this&7."));
         message = message.replace("%color%", color);
         player.sendMessage(Hex(Color(message)));
     }

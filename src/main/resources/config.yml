@@ -36,11 +36,9 @@ Plugin:
       # Access to all colors.
       Set: 'arcanecolors.color.set'
       Hex: 'arcanecolors.color.hex'
-      Force: 'arcanecolors.color.force'
       # Access to certain colors.
       CertainColor: 'arcanecolors.color.%color-name%'
     Reset:
-      Player: 'arcanecolors.reset'
       Force: 'arcanecolors.reset.force'
     Special:
       Bold: 'arcanecolors.bold'
@@ -62,16 +60,13 @@ GUI:
       Filler: 'WHITE_STAINED_GLASS_PANE'
       Colors:
         # Options: Wool, Concrete, Dye. Changes the blocks that the colors are showed as.
-        Type: 'Dye'
+        Type: 'Concrete'
 
 
 # All plugin messages.
 Messages:
   Color:
     Success: '&7You have chosen %color%this &7as your chatcolor.'
-    ForceSet:
-      Staff: '&7You have set %color%THIS &7as the chatcolor for &e%target%'
-      Player: '&7Your color was set to %color%THIS &7by &e%player%'
   Reset:
     Success: '&7You have reset your chatcolor.'
     ForceReset:
@@ -96,7 +91,8 @@ Messages:
     - '&3/color reset &8- &7Resets your color to default.'
     - '&3/color gui &8- &7Opens the main gui menu.'
     - '&3/color set bold/italic/magic/underline/strikethrough &8- &7Sets special effects.'
-    - '&3/color colors &8- &7Shows all available colors.'
+    - '&3Available colors - darkblue, darkgreen, cyan, red, gold, purple, gray'
+    - 'darkgray, blue, black, lime, darkred, pink, yellow, white, aqua'
     - '&3/color help &8- &7Opens this menu.'
     - ''
 

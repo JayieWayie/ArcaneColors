@@ -6,5 +6,8 @@ authors: [ Jayie ]
 description: ChatColor plugin made for ArcaneMC
 commands:
   chatcolor:
-    aliases: [cc, color, arcanecolors, acc]
+    aliases: [cc, color, arcanecolors]
     description: Base player commands for ArcaneColors.
+  achatcolor:
+    aliases: [acc, acolor, admincolor]
+    description: Base admin commands for ArcaneColors.

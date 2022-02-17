@@ -1,6 +1,7 @@
 package me.jayie.arcanecolors.Commands;
 
 import me.jayie.arcanecolors.ArcaneColors;
+import org.apache.commons.lang.NullArgumentException;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -523,6 +524,8 @@ public class playerCommands implements CommandExecutor {
                     player.sendMessage();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                }catch (NullArgumentException e){
+                    player.sendMessage(Color(Hex("&8[&cAC&8] &cUse /color help to see commands.")));
                 }
             }
 
