@@ -2,9 +2,11 @@ package me.jayie.arcanecolors;
 
 import me.jayie.arcanecolors.Commands.playerCommands;
 import me.jayie.arcanecolors.Guis.colorsGUI;
-import me.jayie.arcanecolors.Guis.guiCommands.mainGUICommands;
+import me.jayie.arcanecolors.Guis.guiCommands.colorGUICommands;
 import me.jayie.arcanecolors.Guis.mainGUI;
+import me.jayie.arcanecolors.Guis.staffGUI;
 import me.jayie.arcanecolors.Listeners.chatlistener;
+import me.jayie.arcanecolors.Listeners.permissionsCheck;
 import me.jayie.arcanecolors.database.databaseConnection;
 import me.jayie.arcanecolors.database.databaseQueries;
 import org.bukkit.ChatColor;
@@ -14,19 +16,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.xml.transform.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class ArcaneColors extends JavaPlugin implements Listener {
 
     public databaseConnection DB;
     public databaseQueries DBQ;
     public mainGUI mGUI;
+    public permissionsCheck pmc;
     public colorsGUI cGUI;
+    public staffGUI sGUI;
+
 
 
 
@@ -39,6 +43,8 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
         this.DBQ = new databaseQueries(this);
         this.mGUI = new mainGUI(this);
         this.cGUI = new colorsGUI(this);
+        this.pmc = new permissionsCheck(this);
+        this.sGUI = new staffGUI(this);
         startup();
         try {
             DB.connect();
@@ -61,7 +67,7 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
     public void listeners(){
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new chatlistener(this), this);
-        getServer().getPluginManager().registerEvents(new mainGUICommands(this), this);
+        getServer().getPluginManager().registerEvents(new colorGUICommands(this), this);
     }
 
     public void startup(){
@@ -72,6 +78,7 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
     public void config(){
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        reloadConfig();
     }
 
     @Override
@@ -90,15 +97,27 @@ public final class ArcaneColors extends JavaPlugin implements Listener {
         if (colorcheckrs.next()){
             color = colorcheckrs.getString("color");
         }
-        String message = Color("%prefix% &7Your current chatcolor is %color%this&7.");
-        message.replace("%prefix%", (getConfig().getString("Plugin.Prefix")));
-        message.replace("%color%", color);
-        player.sendMessage(message);
+        String message = Color(Hex(getConfig().getString("Plugin.Prefix") + "" + "&7Your current chatcolor is %color%this&7."));
+        message = message.replace("%color%", color);
+        player.sendMessage(Hex(Color(message)));
     }
 
     private String Color(String s){
         s = ChatColor.translateAlternateColorCodes('&', s);
         return s;
+    }
+
+    private static final Pattern HEX_PATTERN = Pattern.compile("&(#\\w{6})");
+
+    public static String Hex(String message) {
+        Matcher matcher = HEX_PATTERN.matcher(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', message));
+        StringBuffer buffer = new StringBuffer();
+
+        while (matcher.find()) {
+            matcher.appendReplacement(buffer, net.md_5.bungee.api.ChatColor.of(matcher.group(1)).toString());
+        }
+
+        return matcher.appendTail(buffer).toString();
     }
 
 }

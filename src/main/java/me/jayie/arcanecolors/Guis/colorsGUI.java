@@ -4,19 +4,12 @@ import me.jayie.arcanecolors.ArcaneColors;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.SkullType;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,15 +21,16 @@ public class colorsGUI {
         this.plugin = plugin;
     }
 
-    public void colorGUI(Player player){
+    public Inventory colorGUI(Player player){
 
         String fillerItem2 = plugin.getConfig().getString("GUI.Settings.Items.Filler");
-        String guiTitle = plugin.getConfig().getString("GUI.Settings.Title");
+        String guiTitle = "&eColors Menu";
         String guiType = plugin.getConfig().getString("GUI.Settings.Items.Colors.Type");
 
-        Inventory colorsGUI = Bukkit.createInventory((InventoryHolder)player, 54, ChatColor.translateAlternateColorCodes('&', guiTitle));
+        Inventory colorsGUI = Bukkit.createInventory((InventoryHolder)player, 54, org.bukkit.ChatColor.translateAlternateColorCodes('&', guiTitle));
 
         ItemStack fillerItem = new ItemStack(Material.valueOf(fillerItem2), 1);
+        ItemStack backButton = new ItemStack(Material.STONE_BUTTON, 1);
         ItemStack darkblue = null;
         ItemStack darkgreen = null;
         ItemStack cyan = null;
@@ -109,85 +103,123 @@ public class colorsGUI {
         filleritem.setUnbreakable(true);
         fillerItem.setItemMeta(filleritem);
 
+        ItemMeta backmeta = backButton.getItemMeta();
+        backmeta.setDisplayName(Color(Hex("&7Back to menu.")));
+        backButton.setItemMeta(backmeta);
+
 
         ItemMeta dbm = darkblue.getItemMeta();
-        dbm.setDisplayName(Color(Hex("&1Dark Blue.")));
+        dbm.setDisplayName(Color(Hex("&1Dark Blue. &7(1)")));
         ArrayList<String> dbl = new ArrayList<>();
-        dbl.add(Color(Hex("&eLeft click to set your color to &1this.")));
+        dbl.add(Color(Hex("&eset your color to &1this.")));
         dbm.setLore(dbl);
         darkblue.setItemMeta(dbm);
 
         ItemMeta dgm = darkgreen.getItemMeta();
-        dgm.setDisplayName(Color(Hex("&2Dark Green.")));
+        dgm.setDisplayName(Color(Hex("&2Dark Green. &7(2)")));
         ArrayList<String> dgl = new ArrayList<>();
-        dgl.add(Color(Hex("&eLeft click to set your color to &2this.")));
+        dgl.add(Color(Hex("&eset your color to &2this.")));
         dgm.setLore(dgl);
         darkgreen.setItemMeta(dgm);
 
         ItemMeta cm = cyan.getItemMeta();
-        cm.setDisplayName(Color(Hex("&3Cyan.")));
+        cm.setDisplayName(Color(Hex("&3Cyan. &7(3)")));
         ArrayList<String> cl = new ArrayList<>();
-        cl.add(Hex(Color("&eLeft click to set your color to &3this.")));
+        cl.add(Hex(Color("&eset your color to &3this.")));
         cm.setLore(cl);
         cyan.setItemMeta(cm);
 
         ItemMeta pm = purple.getItemMeta();
-        pm.setDisplayName(Color(Hex("&5Purple.")));
+        pm.setDisplayName(Color(Hex("&5Purple. &7(5)")));
         ArrayList<String> pl = new ArrayList<>();
-        pl.add(Color(Hex("&eLeft click to set your color to &5this.")));
+        pl.add(Color(Hex("&eset your color to &5this.")));
         pm.setLore(pl);
         purple.setItemMeta(pm);
 
         ItemMeta gm = gold.getItemMeta();
-        gm.setDisplayName(Color(Hex("&6Gold.")));
+        gm.setDisplayName(Color(Hex("&6Gold. &7(6)")));
         ArrayList<String> gl = new ArrayList<>();
-        gl.add(Color(Hex("&eLeft click to set your color to &6this.")));
+        gl.add(Color(Hex("&eset your color to &6this.")));
         gm.setLore(gl);
         gold.setItemMeta(gm);
 
         ItemMeta lgm = gray.getItemMeta();
-        lgm.setDisplayName(Color(Hex("&7Gray.")));
+        lgm.setDisplayName(Color(Hex("&7Gray. &7(7)")));
         ArrayList<String> lgl = new ArrayList<>();
-        lgl.add(Color(Hex("&eLeft click to set your color to &7this.")));
+        lgl.add(Color(Hex("&eset your color to &7this.")));
         lgm.setLore(lgl);
         gray.setItemMeta(lgm);
 
         ItemMeta ddgm = darkgray.getItemMeta();
-        ddgm.setDisplayName(Color(Hex("&8Dark Gray.")));
+        ddgm.setDisplayName(Color(Hex("&8Dark Gray. &7(8)")));
         ArrayList<String> dggl = new ArrayList<>();
-        dggl.add(Color(Hex("&eLeft click to set your color to &7this.")));
+        dggl.add(Color(Hex("&eset your color to &7this.")));
         ddgm.setLore(dggl);
         darkgray.setItemMeta(ddgm);
 
         ItemMeta bm = blue.getItemMeta();
-        bm.setDisplayName(Color(Hex("&9Blue.")));
+        bm.setDisplayName(Color(Hex("&9Blue. &7(9)")));
         ArrayList<String> bl = new ArrayList<>();
-        bl.add(Color(Hex("&eLeft click to set your color to &9this.")));
+        bl.add(Color(Hex("&eset your color to &9this.")));
         bm.setLore(bl);
         blue.setItemMeta(bm);
 
         ItemMeta blackm = black.getItemMeta();
-        blackm.setDisplayName(Color(Hex("&0Black.")));
+        blackm.setDisplayName(Color(Hex("&0Black. &7(0)")));
         ArrayList<String> blackl = new ArrayList<>();
-        blackl.add(Color(Hex("&eLeft click to set your color to &0this.")));
+        blackl.add(Color(Hex("&eset your color to &0this.")));
         blackm.setLore(blackl);
         black.setItemMeta(blackm);
 
         ItemMeta lm = lime.getItemMeta();
-        
+        lm.setDisplayName(Color(Hex("&aLime. &7(a)")));
+        ArrayList<String> ll = new ArrayList<>();
+        ll.add(Hex(Color("&eset your color to &athis.")));
+        lm.setLore(ll);
         lime.setItemMeta(lm);
 
+        ItemMeta am = aqua.getItemMeta();
+        am.setDisplayName(Color(Hex("&bAqua. &7(b)")));
+        ArrayList<String> al = new ArrayList<>();
+        al.add(Hex(Color("&eset your color to &bthis.")));
+        am.setLore(al);
+        aqua.setItemMeta(am);
+
+        ItemMeta lpm = pink.getItemMeta();
+        lpm.setDisplayName(Color(Hex("&dPink. &7(d)")));
+        ArrayList<String> pll = new ArrayList<>();
+        pll.add(Color(Hex("&eset your color to &dthis.")));
+        lpm.setLore(pll);
+        pink.setItemMeta(lpm);
+
+        ItemMeta ym = yellow.getItemMeta();
+        ym.setDisplayName(Color(Hex("&eYellow. &7(e)")));
+        ArrayList<String> yl = new ArrayList<>();
+        yl.add(Color(Hex("&eset your color to this.")));
+        ym.setLore(yl);
+        yellow.setItemMeta(ym);
+
+        ItemMeta wm = white.getItemMeta();
+        wm.setDisplayName(Color(Hex("&fWhite. &7(f)")));
+        ArrayList<String> wl = new ArrayList<>();
+        wl.add(Color(Hex("&eset your color to &fthis.")));
+        wm.setLore(wl);
+        white.setItemMeta(wm);
 
 
-
-        ItemStack[] menuItems = {fillerItem, fillerItem, fillerItem, fillerItem, fillerItem, fillerItem,fillerItem,fillerItem,fillerItem
-                ,fillerItem,darkblue,fillerItem,darkgreen,fillerItem,cyan,fillerItem,purple,fillerItem,
-                fillerItem,fillerItem,gold,fillerItem,gray,fillerItem,darkgray,fillerItem,fillerItem,
-                fillerItem,blue,fillerItem,black,fillerItem,lime,fillerItem,aqua,fillerItem,
-                fillerItem,fillerItem,pink,fillerItem,yellow,fillerItem,white,fillerItem,fillerItem,
-                fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem};
+        ItemStack[] menuItems = {backButton, fillerItem, fillerItem, fillerItem, fillerItem, fillerItem,fillerItem,fillerItem,fillerItem
+                                ,fillerItem,darkblue,fillerItem,darkgreen,fillerItem,cyan,fillerItem,purple,fillerItem,
+                                fillerItem,fillerItem,gold,fillerItem,gray,fillerItem,darkgray,fillerItem,fillerItem,
+                                fillerItem,blue,fillerItem,black,fillerItem,lime,fillerItem,aqua,fillerItem,
+                                fillerItem,fillerItem,pink,fillerItem,yellow,fillerItem,white,fillerItem,fillerItem,
+                                fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem};
 
         colorsGUI.setContents(menuItems);
+
+        player.openInventory(colorsGUI);
+
+
+        return colorsGUI;
 
     }
 

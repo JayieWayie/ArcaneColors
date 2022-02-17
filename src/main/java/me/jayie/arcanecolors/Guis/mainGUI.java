@@ -38,9 +38,9 @@ public class mainGUI {
         }
 
         String fillerItem2 = plugin.getConfig().getString("GUI.Settings.Items.Filler");
-        String guiTitle = plugin.getConfig().getString("GUI.Settings.Title");
+        String guiTitle = "&cMain Color Menu";
 
-        Inventory MainGUI = Bukkit.createInventory((InventoryHolder)player, 27, ChatColor.translateAlternateColorCodes('&', guiTitle));
+        Inventory MainGUI = Bukkit.createInventory((InventoryHolder)player, 27, org.bukkit.ChatColor.translateAlternateColorCodes('&', guiTitle));
 
         ItemStack fillerItem = new ItemStack(Material.valueOf(fillerItem2), 1);
         ItemStack colorItem = new ItemStack(Material.RED_BED, 1);
@@ -50,7 +50,6 @@ public class mainGUI {
 
         ItemMeta filleritem = fillerItem.getItemMeta();
         filleritem.setDisplayName(Color("&7"));
-        filleritem.setUnbreakable(true);
         fillerItem.setItemMeta(filleritem);
 
         ItemMeta coloritem = colorItem.getItemMeta();
@@ -58,7 +57,6 @@ public class mainGUI {
         ArrayList<String> colorlore = new ArrayList<>();
         colorlore.add(Color(Hex("&eLeft click to go to the color menu.")));
         coloritem.setLore(colorlore);
-        coloritem.setUnbreakable(true);
         colorItem.setItemMeta(coloritem);
 
         ItemMeta staffmeta = staffItem.getItemMeta();
@@ -66,11 +64,9 @@ public class mainGUI {
         ArrayList<String> stafflore = new ArrayList<>();
         stafflore.add(Color(Hex("&eLeft click to go to the staff menu.")));
         staffmeta.setLore(stafflore);
-        staffmeta.setUnbreakable(true);
-        staffItem.setItemMeta(coloritem);
+        staffItem.setItemMeta(staffmeta);
 
         ItemMeta specialmeta = specialItem.getItemMeta();
-        specialmeta.setUnbreakable(true);
         specialmeta.setDisplayName(Color(Hex("&3Special &bEffects")));
         ArrayList<String> speciallore = new ArrayList<>();
         speciallore.add(Color(Hex("&eLeft click to go to the special effects menu.")));
@@ -92,6 +88,8 @@ public class mainGUI {
                                 fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem,fillerItem};
 
         MainGUI.setContents(menuItems);
+
+        player.openInventory(MainGUI);
 
         return MainGUI;
     }
